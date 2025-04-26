@@ -1,0 +1,9 @@
+<library path="rover_c1_hardware">
+  <class name="rover_c1_hardware/RoverC1SystemHardwareInterface"
+         type="rover_c1_hardware::RoverC1SystemHardwareInterface"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Rover C1 hardware interface.
+    </description>
+  </class>
+</library>

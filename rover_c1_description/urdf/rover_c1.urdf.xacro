@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rover_c1">
+
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="use_mock_hardware" default="false" />
+
+  <xacro:include 
+    filename="$(find rover_c1_description)/urdf/rover_c1/rover_c1_macro.urdf.xacro" />
+  
+  <xacro:include 
+    filename="$(find rover_c1_description)/urdf/rover_c1/rover_c1_macro.materials.xacro" />
+  <xacro:include 
+    filename="$(find rover_c1_description)/urdf/rover_c1/rover_c1_macro.ros2_control.xacro" />
+
+  <xacro:rover_c1 prefix="$(arg prefix)" />
+
+  <xacro:rover_c1_control
+    name="RoverC1" prefix="$(arg prefix)" use_mock_hardware="$(arg use_mock_hardware)"/>
+
+</robot>
