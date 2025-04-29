@@ -139,18 +139,10 @@ hardware_interface::CallbackReturn RoverC1SystemHardwareInterface::on_init(const
             dt_ms_[msg.instance] = msg.dt_ms;
         }
 	};
-    
-	auto callback_simuli = [this](const std_msgs::msg::Float32 &msg) -> void {
-        
-        simulink_velocity_ = msg.data;
-		
-    };
         
     // Fireup subscriber
     encoder_subscription_ = node_->create_subscription<ardupilot_msgs::msg::Encoder>("/ap/encoder", rclcpp::SensorDataQoS(), callback);
-    encoder_subscription_simuli_ = node_->create_subscription<std_msgs::msg::Float32>("/simulink/speed_rad", rclcpp::SensorDataQoS(), callback_simuli);
-   
-	
+    
 	(void)encoder_subscription_;
 	
     return hardware_interface::CallbackReturn::SUCCESS;
@@ -253,7 +245,7 @@ hardware_interface::return_type RoverC1SystemHardwareInterface::read(const rclcp
     index = 0U;
     
     for (std::size_t i = hw_velocities_.size(); i > 0; i--) {        
-        hw_velocities_[index] = /*simulink_velocity_;*/ get_rate_in_rad((uint8_t)(i - 1UL));
+        hw_velocities_[index] = get_rate_in_rad((uint8_t)(i - 1UL));
         index++;
     }
     
@@ -312,32 +304,13 @@ hardware_interface::return_type RoverC1SystemHardwareInterface::write(const rclc
 	}
 	else {
 		
-		if ((double)hw_commands_[0] > max_velocity) {
-			left_wheel_cmd = max_velocity;
-		}
-		else if ((double)hw_commands_[0] < (max_velocity * (-1))) {
-			left_wheel_cmd = (max_velocity * (-1));		
-		}
-		else {
-			left_wheel_cmd = (double)hw_commands_[0];
-		}
-		
-		if ((double)hw_commands_[1] > max_velocity) {
-			right_wheel_cmd = max_velocity;
-		}
-		else if ((double)hw_commands_[1] < (max_velocity * (-1))) {
-			right_wheel_cmd = (max_velocity * (-1));		
-		}
-		else {
-			right_wheel_cmd = (double)hw_commands_[1];
-		}
+		left_wheel_cmd = (double)hw_commands_[0];
+		right_wheel_cmd = (double)hw_commands_[1];
 	}
 	
-	if (max_velocity > 0.0) {
-		left_wheel = map(left_wheel_cmd, max_velocity * (-1), max_velocity, -1, 1);
-		right_wheel = map(right_wheel_cmd, max_velocity * (-1), max_velocity, -1, 1);
-    }
-	
+	left_wheel = map(left_wheel_cmd, -29.0, 29.0, -1, 1);
+	right_wheel = map(right_wheel_cmd, -29.0, 29.0, -1, 1);
+    
     // left wheel, right wheel
     hw_cmd_pub_->publish_data(left_wheel, right_wheel);
 	

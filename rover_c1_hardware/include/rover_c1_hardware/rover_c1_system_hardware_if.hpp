@@ -91,8 +91,6 @@ private:
     rclcpp::Node::SharedPtr node_;
     rclcpp::Subscription<ardupilot_msgs::msg::Encoder>::SharedPtr encoder_subscription_;
     
-	rclcpp::Subscription<std_msgs::msg::Float32>::SharedPtr encoder_subscription_simuli_;
-    
     std::shared_ptr<HardwareCommandPub> hw_cmd_pub_;    
     
     // Objects for logging
