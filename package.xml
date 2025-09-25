@@ -11,8 +11,6 @@
   
   <exec_depend>controller_manager</exec_depend>
   <exec_depend>diff_drive_controller</exec_depend>
-  <exec_depend>rover_description</exec_depend>
-  <exec_depend condition="$ROVER_ROS_BUILD_TYPE == hardware">rover_hardware_interfaces</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>
   <exec_depend>launch</exec_depend>
   <exec_depend>launch_ros</exec_depend>
@@ -20,7 +18,11 @@
   <exec_depend>nav2_common</exec_depend>
   <exec_depend>robot_state_publisher</exec_depend>
   <exec_depend>xacro</exec_depend>
-
+  
+  <!-- Rover dependency -->
+  <exec_depend>rover_description</exec_depend>
+  <exec_depend condition="$ROVER_ROS_BUILD_TYPE == hardware">rover_hardware_interfaces</exec_depend>
+  
   <export>
     <build_type>ament_cmake</build_type>
   </export>
