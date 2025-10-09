@@ -84,7 +84,7 @@ def generate_launch_description():
     namespace = LaunchConfiguration("namespace")
     declare_namespace_arg = DeclareLaunchArgument(
         "namespace",
-        default_value=EnvironmentVariable("ROBOT_NAMESPACE", default_value=""),
+        default_value=EnvironmentVariable("ROVER_NAMESPACE", default_value=""),
         description="Add namespace to all launched nodes.",
     )
 
@@ -155,10 +155,7 @@ def generate_launch_description():
             ("drive_controller/transition_event", "_drive_controller/transition_event"),
             ("imu_broadcaster/imu", "imu/data"),
             ("imu_broadcaster/transition_event", "_imu_broadcaster/transition_event"),
-            (
-                "joint_state_broadcaster/transition_event",
-                "_joint_state_broadcaster/transition_event",
-            ),
+            ("joint_state_broadcaster/transition_event", "_joint_state_broadcaster/transition_event"),
         ],
         arguments=[
             "--ros-args",
