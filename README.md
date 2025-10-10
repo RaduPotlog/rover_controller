@@ -1,14 +1,14 @@
 # rover_controller
 
-The package contains default controller of the robot.
+Package containing default Rover's controller.
 
 ## Config Files
 
-- `wheel_01_controller.yaml` - Rover 4WD (33 inch wheel) controller configuration.
+- `wheel_01_controller.yaml` - Rover 4WD (33 inch wheel) controller's configuration.
 
 ## Launch Files
 
-- `controller.launch.py` - Launch default rover differential controller.
+- `controller.launch.py` - Launch default Rover's differential controller.
 
 ## Running
 -
